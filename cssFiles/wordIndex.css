@@ -20,9 +20,9 @@
   height: 90vh;
   border: 0.5rem solid #1C1C1C;
   border-radius: 10px; 
-  top: 50%;
+  top: 42rem;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,-50rem);
   text-align: center;
 }
 #closeButtonWordIndex {
