@@ -24,6 +24,7 @@
   gap: 5rem;
 }
 #DateAndTime {
+  display: block;
   margin: 0px;
   padding: 0px;
   position: relative;

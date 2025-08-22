@@ -18,56 +18,42 @@ const WordIndex = document.querySelector('#WordIndex')
 const dictionaryContent = document.querySelector('#dictionary-content')
 
 let curLanguage;
-let initedWD = new Set()
 let Check = true
 const radioColor = '#1C1C1C'
 let curQuestion = 0
 let correctRadio;
 let languages = []
-let oldNorseData;
-let frenchData;
 let questionSet;
+const jsonFiles = [
+  'jsonFiles/OldNorse.json',
+  'jsonFiles/French.json',
+];
 
 //dir true = word -> translation ex. oldNorse -> English
 
 async function initializeApp() {
     try {
-        const responseNorse = await fetch('jsonFiles/OldNorse.json');
-        if (!responseNorse.ok) {
-            throw new Error(`HTTP error! status: ${responseNorse.status}`);
+      for(let file of jsonFiles) {
+        const response = await fetch(file)
+        if(!response.ok) {
+          throw new Error('Error! while laoding '+ file + ' status: ' + responseNorse.status)
         }
-        oldNorseData = await responseNorse.json();
-        
-        const responseFrench = await fetch('jsonFiles/French.json');
-        if (!responseFrench.ok) {
-            throw new Error(`HTTP error! status: ${responseFrench.status}`);
-        }
-        frenchData = await responseFrench.json();
-        
-        console.log(">_< laoded <_>");
-        
-        // Füge die geladenen Daten zum 'languages'-Array hinzu
-        languages.push(oldNorseData);
-        languages.push(frenchData);
-        
-        // Jetzt kannst du über das gefüllte Array iterieren
-        for(let language of languages) {
-            let words = [];
-            for(let segment of language.segments) {
-                for(let word of segment.words) {
-                    words.push(word);
-                }
+        const data = await response.json()
+        let words = [];
+        data.hasDictionary = false
+          for(let segment of data.segments) {
+            segment.open = false
+              for(let word of segment.words) {
+              words.push(word);
             }
-            language.words = words;
-        }
-
-        // ... der Rest deines Codes in initializeApp()
-        toggleDisplay(endScreenQuestion, false);
-        toggleDisplay(overlayScreen, true);
-        loadLanguages();
-
+          }
+        data.words = words;
+        languages.push(data)
+      }
+      console.log(">_< laoded <_>"); 
+      loadLanguages();
     } catch (error) {
-        console.error("Fehler beim Laden der Daten:", error);
+        console.error("Error while starting:", error);
     }
 }
 function loadLanguages() {
@@ -77,22 +63,36 @@ function loadLanguages() {
   }
 }
 function createLanguageDisplay(language) {
-  const name = language.name + ": "
+  const name = language.name
   const container = document.createElement('div')
   const table = createTable('languageTable')
+
   let cell = table.rows[0].cells[1]
-  const nameDisp = createWordDisp(name,'nameDisp')
+  const nameDisp = createWordDisp(name + ": ",'nameDisp')
   const dictionary = createWordDisp("Open Dictionary",'tableButton',() => OpenDictionary(language))
   cell.appendChild(dictionary)
+
   cell = table.rows[1].cells[1]
-  const dropdownList = createDropdown(language.name + "Dropdown", [5,10,20], 'dropdownList')
+  const dropdownList = createDropdown(name + "Dropdown", [5,10,20,language.words.length], 'dropdownList')
+  const train = createWordDisp("Do Exercise ",'tableButton',() => initExcersie(language,false))
+  const settings = createWordDisp(" ⚙️ ",'settingsButton',() => openSettings(language)) 
   cell.appendChild(dropdownList)
-  const train = createWordDisp("Do Exercise",'tableButton',() => initExcersie(language,false))
   cell.appendChild(train)
+  cell.appendChild(settings)
+
   cell = table.rows[0].cells[0]
   cell.appendChild(nameDisp)
+
   container.appendChild(table)
   languageOverlay.appendChild(container)
+}
+function createLanguageSettings(language) {
+
+}
+function openSettings(language) {
+  if(!language.settings) {
+    createLanguageSettings
+  }
 }
 function createDropdown(id, optionsArray = [5,10,20], Class = 'dropdownList') {
   const selectElement = document.createElement('select')
@@ -107,31 +107,32 @@ function createDropdown(id, optionsArray = [5,10,20], Class = 'dropdownList') {
   return selectElement
 }
 function OpenDictionary(language) {
-  console.log("dictionary: "+ language.name)
-  if(!initedWD.has(language.name)) {
+  if(!language.hasDictionary) {
     createDictionary(language)
+    language.hasDictionary = true
   }
   toggleDisplay(WordIndex,true)
   toggleDisplay(language.name + "Dictionary",true,false)
   curLanguage = language.name
-  initedWD.add(language.name)
 }
 function createDictionary(language) {
   const table = createTable('LanguageDisp',language.segments.length*2+1,1,language.name + "Dictionary")
+
   let cell = table.rows[0].cells[0]
   cell.className = 'DictionaryNameDisp'
   const name = createWordDisp(language.name,'')
   cell.appendChild(name)
+
   const segments = language.segments
   let i = 1
-  let j = 2
   for(let segment of segments) {
     cell = table.rows[i].cells[0]
     const segmentName = createWordDisp(segment.name,'DictionarySegNameDisp')
     const openSegment = createWordDisp('↕','openDictionarySegment',() => openCloseSegment(segment))
     cell.appendChild(segmentName)
     cell.appendChild(openSegment)
-    i += 2
+    i++
+
     const words = createWordDisp("",'dictionarySegmentWords')
     words.id = segment.name + "open"
     for(let word of segment.words) {
@@ -140,11 +141,10 @@ function createDictionary(language) {
       words.appendChild(wordX)
       words.appendChild(br)
     }
-    segment.open = false
     toggleDisplay(words,false)
-    cell = table.rows[j].cells[0]
+    cell = table.rows[i].cells[0]
     cell.appendChild(words)
-    j += 2
+    i++
   }
   
   dictionaryContent.appendChild(table)
@@ -157,7 +157,7 @@ function initExcersie(language,dir = false) {
   const dropdownElement = document.getElementById(language.name + "Dropdown");
   const amount = dropdownElement.value
   generateNewQuestionSet(amount,language,dir)
-  displayQuestion(questionSet.questions[curQuestion])
+  displayQuestion(questionSet.questions[curQuestion],0)
 }
 function createTable(Class,rows = 3,cols = 2,id = undefined) {
   const table = document.createElement('table');
@@ -175,10 +175,11 @@ function createTable(Class,rows = 3,cols = 2,id = undefined) {
   table.appendChild(tbody)
   return table;
 }
-function createWordDisp(word,Class,onClick) {
-  let element = document.createElement('span')
+function createWordDisp(word,Class,onClick,id = undefined) {
+  const element = document.createElement('span')
   element.textContent = word
   element.className = Class
+  element.id = id
   if(onClick) {
     element.addEventListener('click',(e) => {
       onClick()
@@ -186,13 +187,13 @@ function createWordDisp(word,Class,onClick) {
   }
   return element;
 }
-function displayQuestion(set) {
-  
+function displayQuestion(set,progress = 0) {
+  Progress.textContent = progress + "%"
   const dir = set.dir
   const correctWord = set.correctWord
   const correctWordPos = set.correcrWordPos
   const options = set.options
-  question.innerHTML = dir ? correctWord.word : correctWord.translation
+  question.textContent = dir ? correctWord.word : correctWord.translation
   correctRadio = correctWordPos
   displayOptions(options,dir)
   toggleDisplay(QuestionDisplay,true)
@@ -200,6 +201,7 @@ function displayQuestion(set) {
 function generateNewQuestionSet(amount,language,dir = true) {
   const words = language.words
   const QuestionSet = {correct: 0,incorrect: 0,length: amount,name:language.name,questions: []}
+
   let correctWords = getAmountRndInt(amount,language.words.length)
   for(let i = 0; i < amount; i++) {
     const corWordIndex = correctWords[i]
@@ -311,7 +313,8 @@ function nexClicked() {
     nextButtonQuestions.innerHTML = 'Check'
     curQuestion++
     if(curQuestion < questionSet.length) {
-      displayQuestion(questionSet.questions[curQuestion])
+      const progress = (questionSet.correct + questionSet.incorrect) / questionSet.length * 100
+      displayQuestion(questionSet.questions[curQuestion],progress)
     }else {  
       curQuestion = 0;
       overlayScreen.style.backgroundColor = 0
