@@ -35,7 +35,6 @@ function preload() {
   french = loadJSON('French.json')
 }
 function setup() {
-  noCanvas();
   languages.push(oldNorseData)
   languages.push(french)
   for(let language of languages) {
