@@ -1,0 +1,21 @@
+html, body { margin: 0; padding: 0;background: black }
+::-webkit-scrollbar {
+width: 10px;
+}
+
+/* Track of the scrollbar */
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+/* Handle of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background: #1C1C1C;
+  border-radius: 5px;
+  background-clip: content-box;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
