@@ -25,21 +25,19 @@ let curQuestion = 0
 let correctRadio;
 let languages = []
 let oldNorseData;
-let french;
+let frenchData;
 let questionSet;
 
 //dir true = word -> translation ex. oldNorse -> English
-setup()
+
 async function loadData() {
   try {
-    // Laden der OldNorse.json-Datei
     const responseNorse = await fetch('jsonFiles/OldNorse.json');
     if (!responseNorse.ok) {
       throw new Error(`HTTP error! status: ${responseNorse.status}`);
     }
     oldNorseData = await responseNorse.json();
-
-    // Laden der French.json-Datei
+    
     const responseFrench = await fetch('jsonFiles/French.json');
     if (!responseFrench.ok) {
       throw new Error(`HTTP error! status: ${responseFrench.status}`);
@@ -54,9 +52,11 @@ async function loadData() {
   } catch (error) {
     console.error("Fehler beim Laden der Daten:", error);
   }
+  setup()
+
 }
 function setup() {
-  loadData()
+  console.log('<_>')
   languages.push(oldNorseData)
   languages.push(french)
   for(let language of languages) {
@@ -74,7 +74,6 @@ function setup() {
   updateTime();
   updateDate();
 }
-setInterval(updateTime, 60000);
 function loadLanguages() {
   languageOverlay.innerHTML = ''
   for(let language of languages) {
@@ -252,7 +251,6 @@ function displayOptions(options = ['Option 0', 'Option 1', 'Option 2'],dir = tru
     }
   });
 }
-console.log(getAmountRndInt(5,5))
 function getAmountRndInt(amount,max) {
   if(amount > max)  return false
   const array = Array.from({ length: max }, (_, index) => index);
@@ -360,3 +358,5 @@ function updateDate() {
   const dateString = `${day}.${month}.${year}`;
   document.getElementById('date').textContent = dateString;
 }
+loadData()
+setInterval(updateTime, 60000);
