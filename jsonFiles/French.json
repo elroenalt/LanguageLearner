@@ -1,0 +1,114 @@
+{
+  "name": "French",
+  "segments": [
+    {
+      "name": "Les aliments",
+      "words": [
+        {
+          "word": "à la carte",
+          "translation": "nach Wunsch"
+        },
+        {
+          "word": "l’arachide (f)",
+          "translation": "die Erdnuss"
+        },
+        {
+          "word": "le cacao",
+          "translation": "der Kakao"
+        },
+        {
+          "word": "le café",
+          "translation": "der Kaffee, das Café"
+        },
+        {
+          "word": "le citron vert",
+          "translation": "die Limone"
+        },
+        {
+          "word": "le cornet",
+          "translation": "die spitze Tüte, Eiswaffel"
+        },
+        {
+          "word": "le crabe",
+          "translation": "der Krebs"
+        },
+        {
+          "word": "cuit, e",
+          "translation": "gekocht"
+        },
+        {
+          "word": "la datte",
+          "translation": "die Dattel"
+        },
+        {
+          "word": "l'eau gazeuse (f.)",
+          "translation": "das Mineralwasser"
+        },
+        {
+          "word": "l'eau plate (f.)",
+          "translation": "das stille Wasser"
+        },
+        {
+          "word": "goûter qc",
+          "translation": "etw. probieren, kosten"
+        },
+        {
+          "word": "l'huile de palme (f.)",
+          "translation": "das Palmöl"
+        },
+        {
+          "word": "l'huître (f.)",
+          "translation": "die Auster"
+        },
+        {
+          "word": "le kiwi",
+          "translation": "Kiwi"
+        },
+        {
+          "word": "la mangue",
+          "translation": "Mango"
+        },
+        {
+          "word": "l’œuf à la coque (m.)",
+          "translation": "das (weich) gekochte Ei"
+        },
+        {
+          "word": "l’olive (f.)",
+          "translation": "Olive"
+        },
+        {
+          "word": "les pâtes (f. pl.)",
+          "translation": "die Nudeln"
+        },
+        {
+          "word": "la petite cuillère",
+          "translation": "Teelöffel"
+        },
+        {
+          "word": "la pomme de terre",
+          "translation": "Kartoffel"
+        },
+        {
+          "word": "le poulet",
+          "translation": "das Hähnchen"
+        },
+        {
+          "word": "salé / salée",
+          "translation": "salzig, gesalzen"
+        },
+        {
+          "word": "végétal, e / végétaux",
+          "translation": "pflanzlich"
+        },
+        {
+          "word": "la viande",
+          "translation": "Fleisch"
+        },
+        {
+          "word": "le vin",
+          "translation": "Wein"
+        }
+      ]
+    }
+  ]
+}
