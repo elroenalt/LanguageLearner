@@ -31,8 +31,8 @@ let questionSet;
 //dir true = word -> translation ex. oldNorse -> English
 
 function preload() {
-  oldNorseData = loadJSON('OldNorse.json')
-  french = loadJSON('French.json')
+  oldNorseData = loadJSON('jsonFiles/OldNorse.json')
+  french = loadJSON('jsonFiles/French.json')
 }
 function setup() {
   languages.push(oldNorseData)
