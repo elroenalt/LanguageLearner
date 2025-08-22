@@ -30,48 +30,45 @@ let questionSet;
 
 //dir true = word -> translation ex. oldNorse -> English
 
-async function loadData() {
-  try {
-    const responseNorse = await fetch('jsonFiles/OldNorse.json');
-    if (!responseNorse.ok) {
-      throw new Error(`HTTP error! status: ${responseNorse.status}`);
-    }
-    oldNorseData = await responseNorse.json();
-    
-    const responseFrench = await fetch('jsonFiles/French.json');
-    if (!responseFrench.ok) {
-      throw new Error(`HTTP error! status: ${responseFrench.status}`);
-    }
-    frenchData = await responseFrench.json();
+async function initializeApp() {
+    try {
+        const responseNorse = await fetch('jsonFiles/OldNorse.json');
+        if (!responseNorse.ok) {
+            throw new Error(`HTTP error! status: ${responseNorse.status}`);
+        }
+        oldNorseData = await responseNorse.json();
+        
+        const responseFrench = await fetch('jsonFiles/French.json');
+        if (!responseFrench.ok) {
+            throw new Error(`HTTP error! status: ${responseFrench.status}`);
+        }
+        frenchData = await responseFrench.json();
+        
+        console.log(">_< laoded <_>");
+        
+        // Füge die geladenen Daten zum 'languages'-Array hinzu
+        languages.push(oldNorseData);
+        languages.push(frenchData);
+        
+        // Jetzt kannst du über das gefüllte Array iterieren
+        for(let language of languages) {
+            let words = [];
+            for(let segment of language.segments) {
+                for(let word of segment.words) {
+                    words.push(word);
+                }
+            }
+            language.words = words;
+        }
 
-    console.log("Daten erfolgreich geladen!");
-    console.log("OldNorse Daten:", oldNorseData);
-    console.log("French Daten:", frenchData);
-    setup()
+        // ... der Rest deines Codes in initializeApp()
+        toggleDisplay(endScreenQuestion, false);
+        toggleDisplay(overlayScreen, true);
+        loadLanguages();
 
-  } catch (error) {
-    console.error("Fehler beim Laden der Daten:", error);
-  }
-
-}
-function setup() {
-  console.log('<_>')
-  languages.push(oldNorseData)
-  languages.push(frenchData)
-  for(let language of languages) {
-    let words = []
-    for(let segment of language.segments) {
-      for(let word of segment.words) {
-        words.push(word)
-      }
+    } catch (error) {
+        console.error("Fehler beim Laden der Daten:", error);
     }
-    language.words = words;
-  }
-  toggleDisplay(endScreenQuestion,false)
-  toggleDisplay(overlayScreen,true)
-  loadLanguages()
-  updateTime();
-  updateDate();
 }
 function loadLanguages() {
   languageOverlay.innerHTML = ''
@@ -357,5 +354,9 @@ function updateDate() {
   const dateString = `${day}.${month}.${year}`;
   document.getElementById('date').textContent = dateString;
 }
-loadData()
+
+initializeApp();
+console.log('<_>')
+updateTime();
+updateDate();
 setInterval(updateTime, 60000);
