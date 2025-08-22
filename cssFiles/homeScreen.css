@@ -1,0 +1,98 @@
+#MainScreen {
+  text-align: center;
+}
+#title {
+  display: inline-block;
+  padding: 1rem;
+  background: #313131;
+  border: 5px solid #313131;
+  border-radius: 2rem;
+}
+#author {
+  font-size: 1.5rem
+}
+#LanguageOverlay {
+  text-align: left;
+  min-Height: 20vh;
+  width: 90vw;
+  position: absolute;
+  left: 50%;
+  top: 32rem;
+  transform: translate(-50%,-20rem);
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+#DateAndTime {
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  font-size: 1.5rem;
+}
+#time{
+  position: absolute;
+  right: 2rem;
+  top: 0.5rem;
+}
+#date{
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+}
+.nameDisp {
+  position: absolute;
+  margin-left: 1rem;
+  padding-top: 0.2rem
+}
+.languageTable {
+  user-select: none;
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  margin: 0px;
+  padding: 0px;
+}
+.languageTable tr {
+  padding-bottom: 50rem
+}
+.tableButton {
+  cursor: pointer;
+}
+.dropdownList {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  padding: 10px 20px;
+  background-color: #313131;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.dropdownList:focus {
+  outline: none; 
+}
+
+.nameDisp {
+  margin-left: 1rem;
+  padding-top: 0.2rem;
+  position: static; /* Setze die Position auf den Standard */
+}
+
+.languageTable {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  margin: 0;
+  padding: 0;
+  position: static; 
+}
+.languageTable {
+  width: 90vw;
+  min-height: 15vh;
+  background: #313131;
+  border: 5px solid #313131;
+  border-radius: 2rem;
+}
