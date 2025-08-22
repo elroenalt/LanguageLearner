@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="homeScreen.css">
+    <link rel="stylesheet" type="text/css" href="questionScreen.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+      <div id="App">
+        <div id="MainScreen">
+          <p id="title">Language Learner 3001 <br> <span id="author">by Yannik Schützek</span></p>
+          <div id="LanguageOverlay">
+          Language: WordList Train:Amount
+          </div>
+      </div>
+        <div id="Questions">
+          <div id="closeButtonQuestions">❌</div>
+          <p id="progressBarQuestions">0%</p>
+          <p id="instructionQuestions">Translate The Word</p>
+          <p id="WordScentenceQuestions">word</p>
+          <div id="selectionQuestions">
+            <input type="radio" id="option1" name="myRadio" value="0">
+            <label for="option1">Option 1</label>
+
+            <input type="radio" id="option2" name="myRadio" value="1">
+            <label for="option2">Option 2</label>
+
+            <input type="radio" id="option3" name="myRadio" value="2">
+            <label for="option3">Option 3</label>
+          </div>
+          <p id="nextButtonQuestions">Check</p>
+        </div>
+        <div id="WordIndex">
+          <div id="dictionary-content">
+          </div>
+          <div id="closeButtonWordIndex">❌</div>
+        </div>
+        <div id="OverlayScreen">
+          <div id="DateAndTime">
+            <span id="date">00.00.0000</span>
+            <span id="time">00:00</span>
+          </div>
+          <div id="alertScreenQuestions">
+            <p>Complete:</p>
+            <p id="corectQuestions">correct: 0</p>
+            <p id="incorectQuestions">incorrect: 0</p>
+            <div id="backToMenuQuestions">Back To Menu</div>
+          </div>
+          
+        </div>
+      </div>
+    </main>
+    <script src="sketch.js"></script>
+  </body>
+</html>
