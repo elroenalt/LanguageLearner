@@ -47,18 +47,17 @@ async function loadData() {
     console.log("Daten erfolgreich geladen!");
     console.log("OldNorse Daten:", oldNorseData);
     console.log("French Daten:", frenchData);
-    initializeApp();
+    setup()
 
   } catch (error) {
     console.error("Fehler beim Laden der Daten:", error);
   }
-  setup()
 
 }
 function setup() {
   console.log('<_>')
   languages.push(oldNorseData)
-  languages.push(french)
+  languages.push(frenchData)
   for(let language of languages) {
     let words = []
     for(let segment of language.segments) {
