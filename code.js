@@ -29,12 +29,34 @@ let french;
 let questionSet;
 
 //dir true = word -> translation ex. oldNorse -> English
+setup()
+async function loadData() {
+  try {
+    // Laden der OldNorse.json-Datei
+    const responseNorse = await fetch('jsonFiles/OldNorse.json');
+    if (!responseNorse.ok) {
+      throw new Error(`HTTP error! status: ${responseNorse.status}`);
+    }
+    oldNorseData = await responseNorse.json();
 
-function preload() {
-  oldNorseData = loadJSON('jsonFiles/OldNorse.json')
-  french = loadJSON('jsonFiles/French.json')
+    // Laden der French.json-Datei
+    const responseFrench = await fetch('jsonFiles/French.json');
+    if (!responseFrench.ok) {
+      throw new Error(`HTTP error! status: ${responseFrench.status}`);
+    }
+    frenchData = await responseFrench.json();
+
+    console.log("Daten erfolgreich geladen!");
+    console.log("OldNorse Daten:", oldNorseData);
+    console.log("French Daten:", frenchData);
+    initializeApp();
+
+  } catch (error) {
+    console.error("Fehler beim Laden der Daten:", error);
+  }
 }
 function setup() {
+  loadData()
   languages.push(oldNorseData)
   languages.push(french)
   for(let language of languages) {
