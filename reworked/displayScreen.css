@@ -1,6 +1,6 @@
 #DisplayScreen {
     font-size: 2rem;
-    display: block;
+    display: none;
     background-color: black;
     border: 7px solid #313131;
     border-radius: 5px;

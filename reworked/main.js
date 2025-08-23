@@ -1,4 +1,5 @@
 
+let checked = false;
 let questionSet;
 let curQuestion = 0;
 let displayScreen;
@@ -8,7 +9,18 @@ const jsonFiles = [
 ];
 async function initializeApp() {
     try {
-      for(let file of jsonFiles) {
+    await fetchJsonFiles()
+    console.log('<_> >_<')
+    const languageDisplay = new LanguageDisplay(languages[0])
+    displayScreen = new DisplayScreen()
+
+    } catch (error) {
+        console.error("Error while starting:", error);
+    }
+}
+async function fetchJsonFiles() {
+    try {
+        for(let file of jsonFiles) {
         const response = await fetch(file)
         if(!response.ok) {
           throw new Error('Error! while laoding '+ file + ' status: ' + responseNorse.status)
@@ -23,15 +35,39 @@ async function initializeApp() {
         data.words = words;
         languages.push(data)
       }
-    console.log('<_> >_<')
-    displayScreen = new DisplayScreen()
-    questionSet = createQuestionSet(languages[0],10)
-    displayScreen.openScreen()
-    displayScreen.displayQuestion(questionSet.questions[curQuestion])
-
-    } catch (error) {
+    }catch (error) {
         console.error("Error while starting:", error);
+    } 
+}
+class LanguageDisplay{
+    constructor(language) {
+        this.container = createElement({type: 'div'})
+        const languagesHTML = document.querySelector('#languages')
+        const table = createTable('questionContainer')
+        let cell = table.rows[0].cells[0]
+        const languageName = createElement({type: 'span',text: language.name + ": "})
+        cell = table.rows[0].cells[1]
+        cell.appendChild(languageName)
+        const train = createElement({class: 'trainLanguage',type: 'span',text: 'train',onClick: () => initQuestions(language,5,true)})
+        cell.appendChild(train)
+        this.container.appendChild(table)
+        languagesHTML.appendChild(this.container)
     }
+}
+function createTable(className = undefined,rows = 2,cols = 2) {
+    const table = createElement({type: 'table',class: 'languageTable'})
+    table.className = className
+    const tbody = createElement({type: 'tbody'})
+    for(let row = 0; row < rows; row++) {
+        const tr = createElement({type: 'tr'})
+        for(let col = 0; col < cols; col++) {
+            const td = createElement({type: 'td'})
+            tr.appendChild(td)
+        }
+        tbody.appendChild(tr)
+    }
+    table.appendChild(tbody)
+    return table
 }
 class DisplayScreen {
     constructor() {
@@ -40,6 +76,7 @@ class DisplayScreen {
         this.DisplayScreenHTML.appendChild(this.QuestionScreen)
         this.DictionaryScreen;
         this.currentScreen = this.QuestionScreen;
+        document.querySelector('#closeDisplayScreen').addEventListener('click', () => this.closeScreen())
     }
     displayQuestion(question) {
         const corIndex = question.corIndex
@@ -80,16 +117,24 @@ class DisplayScreen {
     }
 
 }
+function initQuestions(language,amount,dirType) {
+    displayScreen.openScreen()
+    curQuestion = 0
+    questionSet = createQuestionSet(language,amount,dirType)
+    console.log(questionSet)
+    displayScreen.displayQuestion(questionSet.questions[curQuestion])
+    checked = false;
+}
 function createQuestionSet(language,amount,dirType = 0) {
-    let questionSet = {questions: [],name: language.name,progress: {incorrect: 0,correct: 0,length:amount}}
+    let QuestionSet = {questions: [],name: language.name,progress: {incorrect: 0,correct: 0,length:amount}}
     let used = new Set()
     for(let i = 0; i < amount; i++) {
         const wordIndex = getRndIntExcept(used,amount)
         console.log(wordIndex)
         const question = new Question(language,wordIndex,dirType)
-        questionSet.questions.push(question)
+        QuestionSet.questions.push(question)
     }
-    return questionSet
+    return QuestionSet
 }
 class Question {
     constructor(language,wordIndex,dirType) {
@@ -124,15 +169,41 @@ function deselectRadioGroup(groupName) {
   }
 }
 function nextButtonClicked() {
-    const selectedOption = getSelectedRadio('questionSet')
-    const question = questionSet.questions[curQuestion]
-    let highlight = [false,false,false]
-    if(selectedOption !== question.corIndex) {
-        highlight[selectedOption] = 'red'
+    const button = document.querySelector('#nextButtonQuestion')
+    let highlight = [false, false, false]
+
+    if (!checked) {
+        const selectedOption = getSelectedRadio('questionSet');
+        if (selectedOption === null) {
+            return;
+        }
+
+        const question = questionSet.questions[curQuestion]
+        if (parseInt(selectedOption) !== question.corIndex) {
+            highlight[selectedOption] = 'red'
+        }
+        highlight[question.corIndex] = 'green'
+        
+            deselectRadioGroup('questionSet')
+        displayScreen.highlightQuestion(highlight)
+        button.textContent = 'Next'
+        checked = true
+    } else {
+        curQuestion++;
+        if (curQuestion < questionSet.progress.length) {
+            const question = questionSet.questions[curQuestion]
+            displayScreen.displayQuestion(question)
+            deselectRadioGroup('questionSet')
+            displayScreen.highlightQuestion() // Clear highlights
+            button.textContent = 'Check'
+            checked = false
+        } else {
+            // Quiz is finished
+            alert('Quiz complete!');
+            displayScreen.closeScreen();
+            checked = false;
+        }
     }
-    highlight[question.corIndex] = 'green'
-    deselectRadioGroup('questionSet')
-    displayScreen.highlightQuestion(highlight)
 }
 function getSelectedRadio(groupName) {
     let selected = document.querySelector('input[name="'+groupName+'"]:checked')
@@ -149,13 +220,12 @@ function createQuestionScreen() {
     const button = createElement({
         type: 'button',
         onClick: nextButtonClicked,
-        text: 'check',
+        text: 'Check',
         id: 'nextButtonQuestion'
     })
     container.appendChild(instruction)
     container.appendChild(options)
     container.appendChild(button)
-
     return container
 }
 function createRadio(options = ['option-0','option-1','option-2'],groupName = 'name',id = undefined) {
@@ -184,7 +254,10 @@ function createElement(options) {
     if(options.id) element.id = options.id;
     if(options.className) element.className = options.className;
     if(options.text) element.textContent = options.text;
-    if(options.onClick) element.addEventListener('click', options.onClick)
+    if(options.onClick) {
+         element.addEventListener('click', options.onClick)
+         element.classList.add('pointer')
+    }
     if (options.type === 'input') {
         if (options.name) element.name = options.name;
         if (options.value) element.value = options.value;

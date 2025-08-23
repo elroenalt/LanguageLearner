@@ -1,0 +1,135 @@
+{
+  "name": "oldNorse",
+  "segments": [
+    {
+      "name": "basicVoc",
+      "words": [
+        {
+          "word": "aldri",
+          "translation": "never"
+        },
+        {
+          "word": "aptr",
+          "translation": "again"
+        },
+        {
+          "word": "at",
+          "translation": "that"
+        },
+        {
+          "word": "áðr",
+          "translation": "before"
+        },
+        {
+          "word": "braut",
+          "translation": "away"
+        },
+        {
+          "word": "eða",
+          "translation": "or"
+        },
+        {
+          "word": "eigi",
+          "translation": "not/don't/-n't"
+        },
+        {
+          "word": "ek",
+          "translation": "I"
+        },
+        {
+          "word": "en",
+          "translation": "but"
+        },
+        {
+          "word": "er",
+          "translation": "is/which/when"
+        },
+        {
+          "word": "hann",
+          "translation": "he"
+        },
+        {
+          "word": "heðan",
+          "translation": "from here"
+        },
+        {
+          "word": "hér",
+          "translation": "here"
+        },
+        {
+          "word": "hingat",
+          "translation": "to here"
+        },
+        {
+          "word": "hvat",
+          "translation": "what"
+        },
+        {
+          "word": "hversu",
+          "translation": "how"
+        },
+        {
+          "word": "illa",
+          "translation": "badly"
+        },
+        {
+          "word": "mjǫk",
+          "translation": "very"
+        },
+        {
+          "word": "nú",
+          "translation": "now"
+        },
+        {
+          "word": "ok",
+          "translation": "and"
+        },
+        {
+          "word": "svá",
+          "translation": "so"
+        },
+        {
+          "word": "var",
+          "translation": "was"
+        },
+        {
+          "word": "vel",
+          "translation": "well"
+        },
+        {
+          "word": "þat",
+          "translation": "it"
+        },
+        {
+          "word": "þá",
+          "translation": "then (or them)"
+        },
+        {
+          "word": "þó",
+          "translation": "though"
+        },
+        {
+          "word": "þaðan",
+          "translation": "from there"
+        },
+        {
+          "word": "þar",
+          "translation": "there"
+        },
+        {
+          "word": "þangat",
+          "translation": "to there"
+        }
+      ]
+    },
+    {
+      "name": "testVoc2",
+      "words": [
+        {
+          "word": "test",
+          "translation": "test"
+        }
+      ]
+    }
+  ]
+}

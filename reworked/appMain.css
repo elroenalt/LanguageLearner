@@ -15,16 +15,19 @@ html, body { margin: 0; padding: 0;background: black; color: white}
     border-radius: 5rem;
 }
 #author {
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
-#languages {
+.trainLanguage {
+    padding-left: 5rem;
+}
+.questionContainer {
     position: absolute;
     left: 50%;
-    top: 62rem;
-    transform: translate(-50%,-50rem);
-    width: 90vw;
-    min-height: 30vh;
-    background-color: black;
+    top: 10rem;
+    transform: translate(-50%,0rem);
+    width: 60vw;
+    height: 10rem;
+    background-color: #313131;
     border-radius: 5rem;
 }
 #settings {
@@ -37,4 +40,15 @@ html, body { margin: 0; padding: 0;background: black; color: white}
 }
 #settings:hover {
     transform: scale(1.1);
+}
+.pointer {
+    cursor: pointer;
+}
+@media screen and (max-width: 800px) {
+    .questionContainer {
+        width: 90vw;
+    }
+    #App {
+        font-size: 2rem;
+    }
 }

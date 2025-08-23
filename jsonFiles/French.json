@@ -1,0 +1,381 @@
+{
+  "name": "French",
+  "segments": [
+     {
+   "name": "Le physique",
+   "words": [
+    {
+     "word": "grand, e",
+     "translation": "groß"
+    },
+    {
+     "word": "petit, e",
+     "translation": "klein"
+    },
+    {
+     "word": "maigre",
+     "translation": "mager"
+    },
+    {
+     "word": "mince",
+     "translation": "schlank"
+    },
+    {
+     "word": "gros, se",
+     "translation": "dick"
+    },
+    {
+     "word": "la peau claire",
+     "translation": "die helle Haut"
+    },
+    {
+     "word": "bronze, e",
+     "translation": "gebräunt"
+    },
+    {
+     "word": "pâle",
+     "translation": "blass"
+    },
+    {
+     "word": "les cheveux blonds",
+     "translation": "blonde Haare"
+    },
+    {
+     "word": "les cheveux raides",
+     "translation": "glatte Haare"
+    },
+    {
+     "word": "les yeux bleus",
+     "translation": "blaue Augen"
+    },
+    {
+     "word": "une barbe",
+     "translation": "ein Bart"
+    },
+    {
+     "word": "une moustache",
+     "translation": "ein Schnurrbart"
+    },
+    {
+     "word": "porter des lunettes",
+     "translation": "eine Brille tragen"
+    },
+    {
+     "word": "beau, belle",
+     "translation": "schön"
+    }
+   ]
+  },
+  {
+   "name": "Les vêtements, le look",
+   "words": [
+    {
+     "word": "le pull",
+     "translation": "der Pullover"
+    },
+    {
+     "word": "le tee-shirt",
+     "translation": "das T-Shirt"
+    },
+    {
+     "word": "la chemise",
+     "translation": "das Hemd"
+    },
+    {
+     "word": "le pantalon",
+     "translation": "die Hose"
+    },
+    {
+     "word": "le jean",
+     "translation": "die Jeans"
+    },
+    {
+     "word": "la robe",
+     "translation": "das Kleid"
+    },
+    {
+     "word": "le manteau",
+     "translation": "der Mantel"
+    },
+    {
+     "word": "la veste",
+     "translation": "die Jacke"
+    },
+    {
+     "word": "la cravate",
+     "translation": "die Krawatte"
+    },
+    {
+     "word": "les baskets",
+     "translation": "die Turnschuhe"
+    },
+    {
+     "word": "noir, e",
+     "translation": "schwarz"
+    },
+    {
+     "word": "bleu, e",
+     "translation": "blau"
+    },
+    {
+     "word": "à rayures",
+     "translation": "gestreift"
+    },
+    {
+     "word": "en coton",
+     "translation": "aus Baumwolle"
+    },
+    {
+     "word": "avoir un look soigné",
+     "translation": "einen gepflegten Look haben"
+    }
+   ]
+  },
+  {
+   "name": "Le comportement, le caractère",
+   "words": [
+    {
+     "word": "actif, ive",
+     "translation": "aktiv"
+    },
+    {
+     "word": "calme",
+     "translation": "ruhig"
+    },
+    {
+     "word": "créatif, ive",
+     "translation": "kreativ"
+    },
+    {
+     "word": "courageux, euse",
+     "translation": "mutig"
+    },
+    {
+     "word": "généreux, euse",
+     "translation": "großzügig"
+    },
+    {
+     "word": "honnête",
+     "translation": "ehrlich"
+    },
+    {
+     "word": "indépendant, e",
+     "translation": "unabhängig"
+    },
+    {
+     "word": "intelligent, e",
+     "translation": "intelligent"
+    },
+    {
+     "word": "sympa",
+     "translation": "nett"
+    },
+    {
+     "word": "timide",
+     "translation": "schüchtern"
+    },
+    {
+     "word": "tolérant, e",
+     "translation": "tolerant"
+    },
+    {
+     "word": "travailleur, euse",
+     "translation": "fleißig"
+    }
+   ]
+  },
+  {
+   "name": "Les émotions",
+   "words": [
+    {
+     "word": "la joie",
+     "translation": "die Freude"
+    },
+    {
+     "word": "la tristesse",
+     "translation": "die Trauer"
+    },
+    {
+     "word": "la peur",
+     "translation": "die Angst"
+    },
+    {
+     "word": "la colère",
+     "translation": "die Wut"
+    },
+    {
+     "word": "content, e",
+     "translation": "zufrieden"
+    },
+    {
+     "word": "déçu, e",
+     "translation": "enttäuscht"
+    },
+    {
+     "word": "heureux, euse",
+     "translation": "glücklich"
+    },
+    {
+     "word": "triste",
+     "translation": "traurig"
+    }
+   ]
+  },
+  {
+   "name": "Les relations personnelles",
+   "words": [
+    {
+     "word": "la famille",
+     "translation": "die Familie"
+    },
+    {
+     "word": "les parents",
+     "translation": "die Eltern"
+    },
+    {
+     "word": "les amis",
+     "translation": "die Freunde"
+    },
+    {
+     "word": "l'amitié",
+     "translation": "die Freundschaft"
+    },
+    {
+     "word": "l'amour",
+     "translation": "die Liebe"
+    },
+    {
+     "word": "le couple",
+     "translation": "das Paar"
+    },
+    {
+     "word": "se marier",
+     "translation": "heiraten"
+    },
+    {
+     "word": "marié, e",
+     "translation": "verheiratet"
+    },
+    {
+     "word": "se disputer",
+     "translation": "sich streiten"
+    },
+    {
+     "word": "respecter qn",
+     "translation": "jdn respektieren"
+    }
+   ]
+  },
+  {
+   "name": "La formation, la vie professionnelle",
+   "words": [
+    {
+     "word": "élève",
+     "translation": "Schüler, in"
+    },
+    {
+     "word": "étudiant, e",
+     "translation": "Student"
+    },
+    {
+     "word": "professeur",
+     "translation": "Lehrer, in"
+    },
+    {
+     "word": "faire un stage",
+     "translation": "ein Praktikum machen"
+    },
+    {
+     "word": "obtenir un diplôme",
+     "translation": "einen Abschluss machen"
+    },
+    {
+     "word": "le marché du travail",
+     "translation": "der Arbeitsmarkt"
+    },
+    {
+     "word": "travailler à temps plein",
+     "translation": "in Vollzeit arbeiten"
+    },
+    {
+     "word": "être au chômage",
+     "translation": "arbeitslos sein"
+    }
+   ]
+  },
+  {
+   "name": "La politique",
+   "words": [
+    {
+     "word": "la démocratie",
+     "translation": "die Demokratie"
+    },
+    {
+     "word": "le gouvernement",
+     "translation": "die Regierung"
+    },
+    {
+     "word": "le/la président, e",
+     "translation": "der, die Präsident, in"
+    },
+    {
+     "word": "le parlement",
+     "translation": "das Parlament"
+    },
+    {
+     "word": "les élections",
+     "translation": "die Wahlen"
+    },
+    {
+     "word": "voter",
+     "translation": "wählen"
+    },
+    {
+     "word": "le parti",
+     "translation": "die Partei"
+    },
+    {
+     "word": "la guerre",
+     "translation": "der Krieg"
+    }
+   ]
+  },
+  {
+   "name": "La société",
+   "words": [
+    {
+     "word": "la population",
+     "translation": "die Bevölkerung"
+    },
+    {
+     "word": "la diversité",
+     "translation": "die Vielfalt"
+    },
+    {
+     "word": "le milieu social",
+     "translation": "das soziale Milieu"
+    },
+    {
+     "word": "habiter",
+     "translation": "wohnen"
+    },
+    {
+     "word": "le style de vie",
+     "translation": "der Lebensstil"
+    },
+    {
+     "word": "la culture",
+     "translation": "die Kultur"
+    },
+    {
+     "word": "être riche",
+     "translation": "reich sein"
+    },
+    {
+     "word": "être pauvre",
+     "translation": "arm sein"
+    }
+   ]
+  }
+ ]
+}
