@@ -313,7 +313,7 @@ function nexClicked() {
     nextButtonQuestions.innerHTML = 'Check'
     curQuestion++
     if(curQuestion < questionSet.length) {
-      const progress = (questionSet.correct + questionSet.incorrect) / questionSet.length * 100
+      const progress = Math.floor((questionSet.correct + questionSet.incorrect) / questionSet.length * 1000) /10
       displayQuestion(questionSet.questions[curQuestion],progress)
     }else {  
       curQuestion = 0;
