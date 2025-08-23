@@ -1,0 +1,24 @@
+#AlertScreen {
+    width: 27rem;
+    height: 27rem;
+    display: none;
+    position: absolute;
+    background-color: black;
+    border: 5px solid #313131;
+    border-radius: 5px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+#closeAlertScreen {
+    font-size: 2rem;
+    user-select: none;
+    cursor: pointer;
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+#closeAlertScreen:hover {
+    transform: scale(1.2);
+}

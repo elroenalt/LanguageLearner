@@ -1,0 +1,40 @@
+html, body { margin: 0; padding: 0;background: black; color: white}
+#App {
+    font-size: 2rem;
+}
+#title-container {
+    position: relative;
+    text-align: center;
+}
+#title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0rem);
+    width: 22rem;
+    background-color: #313131;
+    border-radius: 5rem;
+}
+#author {
+    font-size: 1rem;
+}
+#languages {
+    position: absolute;
+    left: 50%;
+    top: 62rem;
+    transform: translate(-50%,-50rem);
+    width: 90vw;
+    min-height: 30vh;
+    background-color: black;
+    border-radius: 5rem;
+}
+#settings {
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+#settings:hover {
+    transform: scale(1.1);
+}
