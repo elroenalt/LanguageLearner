@@ -1,4 +1,4 @@
-#AlertScreen {
+#tinyScreen {
     width: 27rem;
     height: 27rem;
     display: none;
@@ -10,7 +10,7 @@
     top: 50%;
     transform: translate(-50%,-50%);
 }
-#closeAlertScreen {
+#closetinyScreen {
     font-size: 2rem;
     user-select: none;
     cursor: pointer;
@@ -19,6 +19,6 @@
     right: -1.5rem;
     transition: transform 0.3s ease-in-out;
 }
-#closeAlertScreen:hover {
+#closetinyScreen:hover {
     transform: scale(1.2);
 }

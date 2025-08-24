@@ -72,8 +72,8 @@ function createTable(className = undefined,rows = 2,cols = 2) {
 class DisplayScreen {
     constructor() {
         this.DisplayScreenHTML = document.querySelector('#DisplayScreen')
-        this.QuestionScreen = createQuestionScreen();
-        this.DisplayScreenHTML.appendChild(this.QuestionScreen)
+        this.QuestionScreen = document.querySelector('#QuestionScreen')
+        document.querySelector('#nextButtonQuestion').addEventListener('click', nextButtonClicked)
         this.DictionaryScreen;
         this.currentScreen = this.QuestionScreen;
         document.querySelector('#closeDisplayScreen').addEventListener('click', () => this.closeScreen())
@@ -86,15 +86,18 @@ class DisplayScreen {
         instruction.textContent = !dir ? options[corIndex].word : options[corIndex].translation
         let value = 0;
         for(let option of options) {
-            const label = document.querySelector('label[for=questionSet-'+value+']')
+            const label = document.querySelector('label[for=option-'+value+']')
             label.textContent = dir ? option.word : option.translation
             label.className = ""
             value++;
         }
     }
-    highlightQuestion(highlights = [false,false,false]) {
+    highlightQuestion(highlights = [false,false,false],disable) {
         for(let value = 0; value < 3; value++) {
-            const label = document.querySelector('label[for=questionSet-'+value+']')
+            const label = document.querySelector('label[for=option-'+value+']')
+            if(disable) {
+                label.classList.add('disable')
+            }
             if(highlights[value]) {
                 label.classList.add(highlights[value])
             }else {
@@ -104,11 +107,7 @@ class DisplayScreen {
     }
     openScreen() {
         this.DisplayScreenHTML.style.display = 'block'
-        if(this.currentScreen) {
-            this.currentScreen.style.display = 'block';
-        }else {
-            throw new Error('Error! while opening '+this.currentScreen)
-        }
+        this.currentScreen.style.display = 'block';
     }
     closeScreen() {
         this.DisplayScreenHTML.style.display = 'none'
@@ -118,12 +117,13 @@ class DisplayScreen {
 
 }
 function initQuestions(language,amount,dirType) {
-    displayScreen.openScreen()
     curQuestion = 0
+    displayScreen.currentScreen = displayScreen.QuestionScreen
+    console.log(displayScreen.currentScreen)
     questionSet = createQuestionSet(language,amount,dirType)
-    console.log(questionSet)
     displayScreen.displayQuestion(questionSet.questions[curQuestion])
     checked = false;
+    displayScreen.openScreen()
 }
 function createQuestionSet(language,amount,dirType = 0) {
     let QuestionSet = {questions: [],name: language.name,progress: {incorrect: 0,correct: 0,length:amount}}
@@ -184,8 +184,8 @@ function nextButtonClicked() {
         }
         highlight[question.corIndex] = 'green'
         
-            deselectRadioGroup('questionSet')
-        displayScreen.highlightQuestion(highlight)
+        deselectRadioGroup('questionSet')
+        displayScreen.highlightQuestion(highlight,true)
         button.textContent = 'Next'
         checked = true
     } else {
@@ -211,22 +211,6 @@ function getSelectedRadio(groupName) {
         return selected.value
     }
     return null
-}
-function createQuestionScreen() {
-    const container = createElement({type: 'div',id: 'questionContainer'})
-    container.style.display = 'none'
-    const instruction = createElement({type: 'span',id: 'questionInstructions',text: 'translate aldri'})
-    const options = createRadio(['option 0','option 1','option 2'],'questionSet','questionSet')
-    const button = createElement({
-        type: 'button',
-        onClick: nextButtonClicked,
-        text: 'Check',
-        id: 'nextButtonQuestion'
-    })
-    container.appendChild(instruction)
-    container.appendChild(options)
-    container.appendChild(button)
-    return container
 }
 function createRadio(options = ['option-0','option-1','option-2'],groupName = 'name',id = undefined) {
     const container = createElement({type: 'div',className: 'radio-container',id: id})

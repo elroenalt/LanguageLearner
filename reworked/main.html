@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="appMain.css">
         <link rel="stylesheet" type="text/css" href="displayScreen.css">
-        <link rel="stylesheet" type="text/css" href="alertScreen.css">
+        <link rel="stylesheet" type="text/css" href="tinyScreen.css">
     </head>
     <main>
         <div id="App">
@@ -20,13 +20,47 @@
         </div>
         <div id="OverlayScreen">
             <div id="DisplayScreen">
+                <div id="QuestionScreen">
+                    <div id="ProgressBarContainer"><div id="ProgressBar"></div></div>
+                    <div id="questionContainer">
+                        <div id="instContainer">
+                            <p id="instQuestionScreen">Translate</p>
+                            <p id="questionInstructions">___</p>
+                        </div>
+
+                        <input type="radio" name="questionSet" id="option-0" value="0">
+                        <label for="option-0">Option-1</label>
+
+                        <input type="radio" name="questionSet" id="option-1" value="1">
+                        <label for="option-1">Option-2</label>
+                        
+                        <input type="radio" name="questionSet" id="option-2" value="2">
+                        <label for="option-2">Option-3</label>
+                        
+                        <p id="nextButtonQuestion">Check</p>
+                    </div>
+                </div>
                 <div id="closeDisplayScreen">❌</div>
             </div>
-            <div id="AlertScreen">
-                AlertScreen
-                <div id="closeAlertScreen">❌</div>
+            <div id="tinyScreen">
+                <div id="questionSettings">
+                    <span id="titleQuestionSettings">Settings Language</span>
+                    <select id="setAmount" name="amount">
+                        <option value="0">10</option>
+                        <option value="1">20</option>
+                        <option value="2">max</option>
+                    </select>
+                    <label for="setType">Change direction: </label>
+                    <select id="setType" name="dirSetting">
+                        <option value="0">new->old</option>
+                        <option value="1">old->new</option>
+                        <option value="2">random</option>
+                    </select>
+                    <span id="saveQuestionSettings">save</span>
+                </div>
+                <div id="closetinyScreen">❌</div>
             </div>
         </div>
     </main>
-    <script src="main.js"></script>
+    <script src="main.js"></script> 
 </html>
