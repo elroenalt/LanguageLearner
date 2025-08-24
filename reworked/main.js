@@ -3,16 +3,21 @@ let checked = false;
 let questionSet;
 let curQuestion = 0;
 let displayScreen;
+let TinyScreen;
 let languages = [];
 const jsonFiles = [
   'jsonFiles/OldNorse.json',
+  'jsonFiles/French.json',
 ];
 async function initializeApp() {
     try {
     await fetchJsonFiles()
     console.log('<_> >_<')
-    const languageDisplay = new LanguageDisplay(languages[0])
+    for(let language of languages) {
+        const languageDisplay = new LanguageDisplay(language)
+    }
     displayScreen = new DisplayScreen()
+    TinyScreen = new tinyScreen()
 
     } catch (error) {
         console.error("Error while starting:", error);
@@ -39,6 +44,40 @@ async function fetchJsonFiles() {
         console.error("Error while starting:", error);
     } 
 }
+class tinyScreen {
+    constructor() {
+        this.tinyScreenHTML = document.querySelector('#tinyScreen')
+        this.languagSettings = document.querySelector('#questionSettings')
+        const closetinyScreen = document.querySelector('#closetinyScreen')
+        closetinyScreen.addEventListener('click', () => this.closeTinyScreen())
+        
+    }
+    displayLanguageSettings(language) {
+        this.openScreen(0)
+        document.querySelector('#saveQuestionSettings').addEventListener('click', () => this.startExcersise(language))
+        const languageDisp = document.querySelector('#titleQuestionSettings')
+        languageDisp.textContent = 'settings ' + language.name
+    }
+    startExcersise(language) {
+        const amount = document.querySelector('#setAmount').value
+        const dir = parseInt(document.querySelector('#setType').value)
+        console.log(dir)
+        initQuestions(language,amount,dir)
+        this.closeTinyScreen()
+    }
+    openScreen(screen) {
+        this.tinyScreenHTML.style.display = 'block'
+        switch(screen) {
+            case 0: 
+                this.languagSettings.style.display = 'block'
+            break;
+        }
+    }
+    closeTinyScreen() {
+        this.tinyScreenHTML.style.display = 'none'
+        this.languagSettings.style.display = 'none'
+    }
+}
 class LanguageDisplay{
     constructor(language) {
         this.container = createElement({type: 'div'})
@@ -48,8 +87,11 @@ class LanguageDisplay{
         const languageName = createElement({type: 'span',text: language.name + ": "})
         cell = table.rows[0].cells[1]
         cell.appendChild(languageName)
-        const train = createElement({class: 'trainLanguage',type: 'span',text: 'train',onClick: () => initQuestions(language,5,true)})
+        const train = createElement({class: 'trainLanguage',type: 'span',text: 'train',onClick: () => TinyScreen.displayLanguageSettings(language)})
         cell.appendChild(train)
+        cell = table.rows[1].cells[1]
+        const dictionary = createElement({class: 'dictionary',type: 'span',text: 'dictionary',onClick: () => initQuestions(language,5,true)})
+        cell.appendChild(dictionary)
         this.container.appendChild(table)
         languagesHTML.appendChild(this.container)
     }
@@ -73,12 +115,16 @@ class DisplayScreen {
     constructor() {
         this.DisplayScreenHTML = document.querySelector('#DisplayScreen')
         this.QuestionScreen = document.querySelector('#QuestionScreen')
+        this.questionProgressBar = document.querySelector('#ProgressBar')
         document.querySelector('#nextButtonQuestion').addEventListener('click', nextButtonClicked)
         this.DictionaryScreen;
         this.currentScreen = this.QuestionScreen;
         document.querySelector('#closeDisplayScreen').addEventListener('click', () => this.closeScreen())
     }
     displayQuestion(question) {
+        const Progress = questionSet.progress
+        const progress = ((Progress.correct + Progress.incorrect) / Progress.length) * 100
+        this.questionProgressBar.style.width = progress + "%"
         const corIndex = question.corIndex
         const options = question.options
         const dir = question.dir
@@ -111,15 +157,13 @@ class DisplayScreen {
     }
     closeScreen() {
         this.DisplayScreenHTML.style.display = 'none'
-        this.currentScreen.style.display = 'none';
-        this.currentScreen = undefined
+        this.QuestionScreen.style.display = 'none';
     }
 
 }
 function initQuestions(language,amount,dirType) {
     curQuestion = 0
-    displayScreen.currentScreen = displayScreen.QuestionScreen
-    console.log(displayScreen.currentScreen)
+    this.currentScreen = this.QuestionScreen
     questionSet = createQuestionSet(language,amount,dirType)
     displayScreen.displayQuestion(questionSet.questions[curQuestion])
     checked = false;
@@ -127,27 +171,41 @@ function initQuestions(language,amount,dirType) {
 }
 function createQuestionSet(language,amount,dirType = 0) {
     let QuestionSet = {questions: [],name: language.name,progress: {incorrect: 0,correct: 0,length:amount}}
-    let used = new Set()
-    for(let i = 0; i < amount; i++) {
-        const wordIndex = getRndIntExcept(used,amount)
-        console.log(wordIndex)
-        const question = new Question(language,wordIndex,dirType)
-        QuestionSet.questions.push(question)
+    
+    const uniqueWordIndices = new Set();
+    const totalWords = language.words.length;
+    
+    while (uniqueWordIndices.size < amount) {
+        const randomIndex = getRndInt(0, totalWords);
+        uniqueWordIndices.add(randomIndex);
     }
-    return QuestionSet
+    
+    const wordIndices = Array.from(uniqueWordIndices);
+
+    for(let i = 0; i < amount; i++) {
+        const wordIndex = wordIndices[i];
+        const question = new Question(language,wordIndex,dirType);
+        QuestionSet.questions.push(question);
+    }
+
+    return QuestionSet;
 }
 class Question {
     constructor(language,wordIndex,dirType) {
         const words = language.words
+        console.log(dirType)
         switch(dirType) {
             case 0: 
                 this.dir = true
+                console.log('a')
             break;
             case 1:
                 this.dir = false
+                console.log('b')
             break;
             case 2:
                 this.dir = getRndInt(0,1) > 0 ? true : false
+                console.log('c')
             break;
         }
         const used = new Set([wordIndex])
@@ -169,6 +227,7 @@ function deselectRadioGroup(groupName) {
   }
 }
 function nextButtonClicked() {
+    const Progress = questionSet.progress
     const button = document.querySelector('#nextButtonQuestion')
     let highlight = [false, false, false]
 
@@ -181,6 +240,9 @@ function nextButtonClicked() {
         const question = questionSet.questions[curQuestion]
         if (parseInt(selectedOption) !== question.corIndex) {
             highlight[selectedOption] = 'red'
+            Progress.incorrect++
+        }else {
+            Progress.correct++
         }
         highlight[question.corIndex] = 'green'
         

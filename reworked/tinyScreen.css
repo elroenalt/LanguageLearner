@@ -4,11 +4,13 @@
     display: none;
     position: absolute;
     background-color: black;
-    border: 5px solid #313131;
-    border-radius: 5px;
+    border: 5px solid #1C1C1C;
+    border-radius: 1rem;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+    text-align: center;
+    font-size: 2.5rem;
 }
 #closetinyScreen {
     font-size: 2rem;
@@ -21,4 +23,30 @@
 }
 #closetinyScreen:hover {
     transform: scale(1.2);
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+select:focus {
+  outline: none; 
+}
+#titleQuestionSettings {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 0;
+}
+.distance {
+    margin-top: 3rem;
+}
+#questionSettings {
+    display: none;
 }

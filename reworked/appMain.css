@@ -21,14 +21,18 @@ html, body { margin: 0; padding: 0;background: black; color: white}
     padding-left: 5rem;
 }
 .questionContainer {
-    position: absolute;
-    left: 50%;
-    top: 10rem;
-    transform: translate(-50%,0rem);
+    padding-left: 1rem;;
+    margin-top: 6rem;
     width: 60vw;
     height: 10rem;
     background-color: #313131;
     border-radius: 5rem;
+}
+#languages {
+    position: fixed;
+    left: 50%;
+    top: 4rem;
+    transform: translate(-50%,0rem);
 }
 #settings {
     cursor: pointer;

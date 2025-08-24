@@ -37,28 +37,32 @@
                         <input type="radio" name="questionSet" id="option-2" value="2">
                         <label for="option-2">Option-3</label>
                         
-                        <p id="nextButtonQuestion">Check</p>
+                        <p id="nextButtonQuestion" class="button">Check</p>
                     </div>
                 </div>
-                <div id="closeDisplayScreen">❌</div>
+                <div id="closeDisplayScreen" class="closeButton">❌</div>
             </div>
             <div id="tinyScreen">
                 <div id="questionSettings">
-                    <span id="titleQuestionSettings">Settings Language</span>
-                    <select id="setAmount" name="amount">
-                        <option value="0">10</option>
-                        <option value="1">20</option>
+                    <p id="titleQuestionSettings" >Settings Language</p>
+                    <br>
+                    <label for="setAmount">Change amount: </label>
+                    <select id="setAmount" name="amount" class="distance">
+                        <option value="1">1</option>
+                        <option value="20">20</option>
                         <option value="2">max</option>
                     </select>
+                    <br>
                     <label for="setType">Change direction: </label>
-                    <select id="setType" name="dirSetting">
+                    <select id="setType" name="dirSetting" class="distance">
                         <option value="0">new->old</option>
                         <option value="1">old->new</option>
                         <option value="2">random</option>
                     </select>
-                    <span id="saveQuestionSettings">save</span>
+                    <br>
+                    <span id="saveQuestionSettings" class="button">start</span>
                 </div>
-                <div id="closetinyScreen">❌</div>
+                <div id="closetinyScreen"  class="closeButton">❌</div>
             </div>
         </div>
     </main>
