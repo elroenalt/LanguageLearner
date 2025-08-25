@@ -1,4 +1,6 @@
 
+let Amount = 5
+let Dir = 2;
 let checked = false;
 let questionSet;
 let curQuestion = 0;
@@ -50,20 +52,17 @@ class tinyScreen {
         this.languagSettings = document.querySelector('#questionSettings')
         const closetinyScreen = document.querySelector('#closetinyScreen')
         closetinyScreen.addEventListener('click', () => this.closeTinyScreen())
-        
+        document.getElementById('settings' ).addEventListener('click', ()=> TinyScreen.displayLanguageSettings())
     }
-    displayLanguageSettings(language) {
+    displayLanguageSettings() {
         this.openScreen(0)
-        document.querySelector('#saveQuestionSettings').addEventListener('click', () => this.startExcersise(language))
+        document.querySelector('#saveQuestionSettings').addEventListener('click', () => this.saveSettings())
         const languageDisp = document.querySelector('#titleQuestionSettings')
-        languageDisp.textContent = 'settings ' + language.name
+        languageDisp.textContent = 'settings '
     }
-    startExcersise(language) {
-        const amount = document.querySelector('#setAmount').value
-        const dir = parseInt(document.querySelector('#setType').value)
-        console.log(dir)
-        initQuestions(language,amount,dir)
-        this.closeTinyScreen()
+    saveSettings() {
+        Amount = document.querySelector('#setAmount').value
+        Dir = parseInt(document.querySelector('#setType').value)
     }
     openScreen(screen) {
         this.tinyScreenHTML.style.display = 'block'
@@ -87,10 +86,10 @@ class LanguageDisplay{
         const languageName = createElement({type: 'span',text: language.name + ": "})
         cell = table.rows[0].cells[1]
         cell.appendChild(languageName)
-        const train = createElement({class: 'trainLanguage',type: 'span',text: 'train',onClick: () => TinyScreen.displayLanguageSettings(language)})
+        const train = createElement({className: 'trainLanguage',type: 'span',text: 'start Session',onClick: () => initQuestions(language,Amount,Dir)})
         cell.appendChild(train)
         cell = table.rows[1].cells[1]
-        const dictionary = createElement({class: 'dictionary',type: 'span',text: 'dictionary',onClick: () => initQuestions(language,5,true)})
+        const dictionary = createElement({className: 'dictionary',type: 'span',text: 'dictionary',onClick: () => initQuestions(language,Amount,Dir)})
         cell.appendChild(dictionary)
         this.container.appendChild(table)
         languagesHTML.appendChild(this.container)
@@ -273,27 +272,6 @@ function getSelectedRadio(groupName) {
         return selected.value
     }
     return null
-}
-function createRadio(options = ['option-0','option-1','option-2'],groupName = 'name',id = undefined) {
-    const container = createElement({type: 'div',className: 'radio-container',id: id})
-    let value = 0;
-    for(let option of options) {
-        let id = groupName +'-'+ value
-        const radio = createElement({type: 'input',id: id,name: groupName,value: value,inputType: 'radio',});
-
-        const label = createElement({ 
-            type: 'label', 
-            text: option,
-            onClick: () => radio.click() 
-        });
-        label.setAttribute('for', id);
-
-        container.appendChild(radio)
-        container.appendChild(label)
-
-        value++;
-    }
-    return container
 }
 function createElement(options) {
     const element = document.createElement(options.type || 'div')

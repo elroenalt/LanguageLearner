@@ -1,9 +1,12 @@
 html, body { margin: 0; padding: 0;background: black; color: white}
 #App {
+    position: fixed;
     font-size: 2rem;
 }
 #title-container {
-    position: relative;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%,0rem);
     text-align: center;
 }
 #title {
@@ -18,26 +21,32 @@ html, body { margin: 0; padding: 0;background: black; color: white}
     font-size: 1.5rem;
 }
 .trainLanguage {
-    padding-left: 5rem;
+    margin-bottom: 0;
+    position: fixed;
+    left: 50%;
+}
+.dictionary {
+    margin-left: 12.6rem;
 }
 .questionContainer {
-    padding-left: 1rem;;
-    margin-top: 6rem;
+    display: table;
+    padding-left: 1rem;
+    margin-top: 2rem;
     width: 60vw;
-    height: 10rem;
+    height: 7rem;
     background-color: #313131;
-    border-radius: 5rem;
+    border-radius: 3rem;
 }
 #languages {
     position: fixed;
     left: 50%;
-    top: 4rem;
+    top: 9rem;
     transform: translate(-50%,0rem);
 }
 #settings {
     cursor: pointer;
     user-select: none;
-    position: absolute;
+    position: fixed;
     right: 0.5rem;
     bottom: 0.5rem;
     transition: transform 0.3s ease-in-out;
@@ -48,6 +57,7 @@ html, body { margin: 0; padding: 0;background: black; color: white}
 .pointer {
     cursor: pointer;
 }
+
 @media screen and (max-width: 800px) {
     .questionContainer {
         width: 90vw;

@@ -1,6 +1,6 @@
 #DisplayScreen {
     font-size: 2rem;
-    display: none;
+    display: block;
     background-color: black;
     border: 7px solid #2C2C2C;
     border-radius: 5px;
@@ -10,6 +10,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+    text-align: center;
 }
 .closeButton {
     cursor: pointer;
@@ -22,11 +23,15 @@
     transition: transform 0.3s ease-in-out;
 }
 .closeButton:hover {
-    transform: scale(1.3);
+    transform: scale(1.1);
+}
+/* Dictionary */
+#DictionaryScreen {
+  margin-top: 1rem
 }
 /* questions */
 #QuestionScreen {
-  text-align: center;
+  display: none;
 }
 #ProgressBarContainer {
   text-align: center;
@@ -35,13 +40,13 @@
   top: 1rem;
   transform: translate(-50%,0rem);
   width: 12rem;
-  height: 2.2rem;
+  height: 2rem;
   background-color: #1C1C1C;
   border-radius: 1rem;
 }
 #ProgressBar {
   background-color: green;
-  width: 10%;
+  width: 0%;
   height: 100%;
   border-radius: 1rem;
 
@@ -125,6 +130,6 @@
 }
 @media screen and (max-width: 800px) {
     #DisplayScreen {
-        width: 90vw;
+        width: 87vw;
     }
 }
